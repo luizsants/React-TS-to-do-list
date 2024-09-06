@@ -1,0 +1,13 @@
+.headerBar{
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    background: var(--gray-700);
+    align-items: center;
+    padding: 1.25rem 0;
+    width: 100%;
+    height: 10rem;
+}
+
