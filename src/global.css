@@ -27,14 +27,19 @@
   box-sizing: border-box;
 }
 
-
 body{
   background: var(--gray-600);
   color: white;
   -webkit-font-smoothing: antialiased;
-  align-items: center;
-  margin: 0;
-  height: 100%;
+  width: 100%;
+  height: auto;
+  overflow-x: hidden ;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 87.5%;
+  }
 }
 
 body,

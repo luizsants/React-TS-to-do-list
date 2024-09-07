@@ -3,9 +3,8 @@
     display: grid;
     justify-content: center;
     align-items: center;
-    height: 5rem;
-    padding: 0 25rem;
-    gap: 0.5rem;
+    height: 4rem;
+    padding: 0 1rem;
 }
 
 .searchForm {
@@ -25,16 +24,12 @@
     border: 1px solid var(--gray-700);
     color: var(--gray-100);
     line-height: 1;
-    overflow-y: hidden;
+    overflow: hidden;
     margin-top:  calc(0px - 1.5rem - 2px);
+    white-space: nowrap;
 }
 
-.searchForm aside {
-    display: flex;
-}
-
-
-.searchForm button {
+.searchForm button[type=submit] {
     display: grid;
     grid-template-columns: 1fr auto;
     flex-direction: column;
@@ -51,10 +46,16 @@
     font-size: 0.8rem;
     font-weight: 700;
     line-height: 1.4;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+.searchForm button[type=submit]:not(:disabled):hover {
+    background: var(--blue);
+    color: var(--gray-400);
 }
 
 .searchForm button img {
     height: 0.8rem;
     width: 0.8rem;
 }
-
