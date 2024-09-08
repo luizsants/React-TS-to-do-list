@@ -29,16 +29,29 @@
 
 body{
   background: var(--gray-600);
-  color: white;
+  color: var(--gray-100);
   -webkit-font-smoothing: antialiased;
   width: 100%;
   height: auto;
-  overflow-x: hidden ;
+
 }
 
-@media (max-width: 768px) {
+body::-webkit-scrollbar {
+  width: 0.4rem; /* Width of the scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: var(--gray-600); /* Color of the track (part of the scrollbar not being dragged) */
+}
+body::-webkit-scrollbar-thumb {
+  background: var(--gray-700); /* Color of the draggable part of the scrollbar */
+}
+
+@media (max-width: 631px) {
   html {
     font-size: 87.5%;
+  }
+  body{
+    display: flex;
   }
 }
 

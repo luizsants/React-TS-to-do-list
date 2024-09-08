@@ -6,7 +6,7 @@ import { Tasks } from "./components/Tasks";
 
 function App() {
   return (
-    <div className={style.outside}>
+    <div >
       <Header />
       <div className={style.wrapper}>
         <main>

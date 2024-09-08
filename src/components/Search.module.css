@@ -12,6 +12,8 @@
     width: 40rem;
     height: 4rem;
     justify-content: space-between;
+    margin-top:  calc(0px - 1.5rem - 30px);
+
 }
 
 .searchForm textarea{
@@ -44,7 +46,7 @@
     background: var(--blue-dark);
     color: var(--gray-100);
     font-size: 0.8rem;
-    font-weight: 700;
+    font-weight: bold;
     line-height: 1.4;
     cursor: pointer;
     transition: background-color 0.1s;

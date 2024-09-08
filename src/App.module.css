@@ -1,14 +1,5 @@
 .wrapper {
-  justify-content: center;
-  display: flex;
-  flex-direction: row;
-  max-width: 70rem;
   margin: 2rem auto;
   width: 100%;
 }
 
-main {
-  display: flex;
-  width: 100%;
-  padding: 0 15rem;
-}
