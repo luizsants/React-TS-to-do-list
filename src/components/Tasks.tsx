@@ -95,7 +95,7 @@ export function Tasks() {
 
   return (
     <article>
-      <div className={styles.container}>
+      <div className={styles.baseSearchForm}>
         <form className={styles.searchForm}>
           <textarea
             name="taskName"

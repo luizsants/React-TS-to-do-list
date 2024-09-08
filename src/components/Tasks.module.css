@@ -1,3 +1,12 @@
+/* General style */
+
+@media (max-width: 768px) {
+    .tasksUnitsBox {
+        padding: 0 6rem;
+
+    }
+}
+
 article{
     width: 100%;
     justify-content: center;
@@ -5,90 +14,9 @@ article{
     gap: 1.8rem;
 }
 
-.headerTasks {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 1.2rem;
-    padding: 0 1rem;
-}
+/* Add Input Area Style */
 
-
-
-
-/* created tasks bellow*/
-.createdTasks {
-    color: var(--blue);
-}
-
-.numberCreatedTasks{
-    display: flex;
-    width:50%;
-    gap: 1rem;
-    align-items: center;
-    font-weight: bold;
-}
-
-.tasksNum{
-    width: 2.2rem;
-    padding: 0.4rem 0.3rem;
-    display: flex;
-    line-height: 1;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    background: var(--gray-400);
-    color: var(--gray-200);
-
-}
-/* done tasks bellow*/
-.doneTasksText {
-    color: var(--purple);
-}
-.numberDoneTasksBox{
-    display: flex;
-    width:50%;
-    gap: 1rem;
-    justify-content: right;
-    align-items: center;
-    font-weight: bold;
-}   
-
-.doneTasksNum{
-    width: 4rem;
-    padding: 0.4rem 0.3rem;
-    display: flex;
-    line-height: 1;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    background: var(--gray-400);
-    color: var(--gray-200);
-}
-
-
-
-
-
-
-
-.tasksContent {
-    height: 15rem;
-    padding: 4rem;
-    margin: 0 1rem;
-    display: grid;
-    border-radius: 8px;
-    border-top: 2px solid var(--gray-500);
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-    background: transparent;
-    color: var(--gray-300);
-}
-
-
-
-.container{
+.baseSearchForm{
     display: grid;
     justify-content: center;
     align-items: center;
@@ -151,6 +79,81 @@ article{
     width: 0.8rem;
 }
 
+.headerTasks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.2rem;
+    padding: 0 1rem;
+}
+
+/* created tasks bellow*/
+.createdTasks {
+    color: var(--blue);
+}
+
+.numberCreatedTasks{
+    display: flex;
+    width:50%;
+    gap: 1rem;
+    align-items: center;
+    font-weight: bold;
+}
+
+.tasksNum{
+    width: 2.2rem;
+    padding: 0.4rem 0.3rem;
+    display: flex;
+    line-height: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background: var(--gray-400);
+    color: var(--gray-200);
+
+}
+/* done tasks bellow*/
+.doneTasksText {
+    color: var(--purple);
+}
+.numberDoneTasksBox{
+    display: flex;
+    width:50%;
+    gap: 1rem;
+    justify-content: right;
+    align-items: center;
+    font-weight: bold;
+}   
+
+.doneTasksNum{
+    width: 4rem;
+    padding: 0.4rem 0.3rem;
+    display: flex;
+    line-height: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background: var(--gray-400);
+    color: var(--gray-200);
+}
+
+/* Task Content Styles bellow */
+
+.tasksContent {
+    height: 15rem;
+    padding: 4rem;
+    margin: 0 1rem;
+    display: grid;
+    border-radius: 8px;
+    border-top: 2px solid var(--gray-500);
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    background: transparent;
+    color: var(--gray-300);
+    overflow: hidden;
+}
+
 .tasksUnitsBox{
     display: flex;
     width: 40rem;
@@ -160,14 +163,6 @@ article{
     justify-content: space-between;
     min-height: 4rem;
 }
-
-@media (max-width: 768px) {
-    .tasksUnitsBox {
-        padding: 0 6rem;
-
-    }
-  }
-  
 
 .taskLine{
     width: 100%;
