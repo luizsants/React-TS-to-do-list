@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import styles from "./Tasks.module.css";
 import { ChangeEvent, useState } from "react";
-import { UnitTask } from "./unitTask";
+import { UnitTask } from "./UnitTask";
 
 import { v4 as uuidv4 } from "uuid";
 
