@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import styles from "./Tasks.module.css";
 import { ChangeEvent, useState } from "react";
-import { Trash } from "phosphor-react";
+import { UnitTask } from "./unitTask";
+
 import { v4 as uuidv4 } from "uuid";
 
 import ClipBoard from "../assets/Clipboard.svg";
 import plus from "../assets/plus.svg";
-import vector from "../assets/Vector.svg";
 
-interface TaskType {
+export interface TaskType {
   id: string;
   content: string;
   isCompleted: boolean;
@@ -20,62 +20,83 @@ export function Tasks() {
   const completedtasksNum = tasks.filter((task) => {
     return task.isCompleted != false;
   });
+  const sortedTasks = tasks.sort((a, b) => {
+    return a.isCompleted === b.isCompleted ? 0 : a.isCompleted ? 1 : -1;
+  });
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (event.key === "Enter") {
-      event.preventDefault();
+      if (text.trim().length === 0) {
+        (event.target as HTMLTextAreaElement).setCustomValidity(
+          "Esse campo é obrigatório."
+        );
+        (event.target as HTMLTextAreaElement).reportValidity();
+
+        event.preventDefault();
+        console.log("nothing submited on click");
+      } else {
+        event.preventDefault();
+        handleAddNewTask(text);
+        setText("");
+        console.log("new task submited on Enter");
+      }
     }
   }
 
   function handleOnChage(event: ChangeEvent<HTMLTextAreaElement>) {
+    if (event.target.value.length === 0) {
+      (event.target as HTMLTextAreaElement).setCustomValidity(
+        "Esse campo é obrigatório."
+      );
+      (event.target as HTMLTextAreaElement).reportValidity();
+    } else {
+      event.target.setCustomValidity("");
+    }
     setText(event.target.value);
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLButtonElement>) {
-    if (text === "") {
-      console.log(text);
+  function handleSubmitOnClick(event: React.MouseEvent<HTMLButtonElement>) {
+    const textArea = document.querySelector("textarea") as HTMLTextAreaElement;
+
+    if (text.trim().length === 0) {
+      event.preventDefault();
+      textArea.setCustomValidity("Esse campo é obrigatório.");
+      textArea.reportValidity();
+      console.log("nothing submited on click");
     } else {
       event.preventDefault();
       handleAddNewTask(text);
       setText("");
+      console.log("new task submited on click");
     }
-  }
-  function handleSubmitOnClick(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-    handleAddNewTask(text);
-    setText("");
-  }
-
-  function handleNewTextInvalid(
-    event: React.InvalidEvent<HTMLTextAreaElement>
-  ) {
-    event.target.setCustomValidity("Esse campo é obrigratório");
   }
 
   function handleAddNewTask(newTask: string) {
-    setTasks([
-      ...tasks,
-      {
-        id: uuidv4(),
-        content: newTask,
-        isCompleted: false,
-      },
-    ]);
+    const taskObjectToAdd = {
+      id: uuidv4(),
+      content: newTask,
+      isCompleted: false,
+    };
+
+    setTasks([...tasks, taskObjectToAdd]);
+    console.log("new task added: ", taskObjectToAdd);
   }
 
   function handleIsCompleted(id: string) {
+    let stsButton: boolean;
     const newTasksArray: TaskType[] = tasks.map((task) => {
       if (task.id === id) {
-        let aux: boolean;
+        // This conditional sentence below allows
+        // the button goes checked and unchecked
         if (task.isCompleted) {
-          aux = false;
+          stsButton = false;
         } else {
-          aux = true;
+          stsButton = true;
         }
         return {
           id: task.id,
           content: task.content,
-          isCompleted: aux,
+          isCompleted: stsButton,
         };
       } else {
         return task;
@@ -87,9 +108,8 @@ export function Tasks() {
 
   function handleDeleteTask(id: string) {
     const tasksPosDele = tasks.filter((task) => {
-      return task.id != id ? task : console.log(task);
+      return task.id != id;
     });
-
     setTasks(tasksPosDele);
   }
 
@@ -103,21 +123,17 @@ export function Tasks() {
             onKeyDown={handleKeyDown}
             value={text}
             placeholder="Adicione uma nova tarefa"
-            onInvalid={handleNewTextInvalid}
             required
           />
           <aside>
-            <button
-              type="submit"
-              onSubmit={handleSubmit}
-              onClick={handleSubmitOnClick}
-            >
+            <button type="submit" onClick={handleSubmitOnClick}>
               <p>Criar</p>
               <img src={plus} alt="plus signal" />
             </button>
           </aside>
         </form>
       </div>
+
       <section className={styles.headerTasks}>
         <div className={styles.numberCreatedTasks}>
           <h1 className={styles.createdTasks}>Tarefas criadas</h1>
@@ -133,47 +149,17 @@ export function Tasks() {
       </section>
 
       {tasks.length === 0 ? (
-        <section className={styles.tasksContent}>
+        <section className={styles.emptyTasksContent}>
           <img className={styles.clipImage} src={ClipBoard} alt="" />
           <h1>Voce ainda nao tem tarefas cadastradas</h1>
           <p>Crie tarefas e organize seus itens a fazer</p>
         </section>
       ) : (
-        <section className={styles.tasksUnitsBox}>
-          {tasks.map((task) => (
-            <div className={styles.taskLine} key={task.id}>
-              {!task.isCompleted ? (
-                <div className={styles.buttonBox}>
-                  <button
-                    onClick={() => handleIsCompleted(task.id)}
-                    className={styles.button}
-                    type="submit"
-                  />
-                </div>
-              ) : (
-                <div className={styles.buttonBox}>
-                  <button
-                    onClick={() => handleIsCompleted(task.id)}
-                    className={styles.buttonMarked}
-                    type="submit"
-                  >
-                    <img src={vector} alt="sinal de ✔" />
-                  </button>
-                </div>
-              )}
-
-              <div className={styles.contentTask}>{task.content}</div>
-              <div className={styles.deleteTaskBox}>
-                <div
-                  onClick={() => handleDeleteTask(task.id)}
-                  className={styles.trashIcon}
-                >
-                  <Trash size={20} />
-                </div>
-              </div>
-            </div>
-          ))}
-        </section>
+        <UnitTask
+          tasksToRender={sortedTasks}
+          handleIsCompleted={handleIsCompleted}
+          handleDeleteTask={handleDeleteTask}
+        />
       )}
     </article>
   );
